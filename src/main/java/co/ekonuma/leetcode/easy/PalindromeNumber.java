@@ -18,16 +18,18 @@ public class PalindromeNumber {
 
     public static boolean isPalindrome(int x) {
         List<Integer> integers = new ArrayList<>();
-        if (x < 11)
-            return false;
+        if (x < 10)
+            return x > -1;
 
-        while (x % 10 != 0) {
+        while (x % 10 != 0 || x / 10 != 0) {
             integers.add(x % 10);
-            x = integers.get(0) < 0 && integers.size() > 1 ? x / 10 * -1 : x / 10;
+            x /= 10;
         }
+
         int lastIndex = integers.size() - 1;
         int firstIndex = 0;
-        while (lastIndex - firstIndex > 1 || integers.size() == 2) {
+        
+        while (lastIndex - firstIndex > 0 || firstIndex == 0) {
             if (!Objects.equals(integers.get(firstIndex), integers.get(lastIndex)))
                 return false;
             firstIndex++;
